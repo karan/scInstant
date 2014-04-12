@@ -48,7 +48,7 @@ $(document).ready(function(){
                 var track = tracks[0];
                 $('#widget').empty();
                 $('#error').empty();
-                SC.oEmbed(track.uri, document.getElementById("widget"));
+                SC.oEmbed(track.uri, {auto_play: true}, document.getElementById("widget"));
             }
         });
     }
