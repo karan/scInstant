@@ -1,0 +1,59 @@
+body {
+    background-color: #ffffff;
+    font-family: avenir, 'avenir next', helvetica, arial, sans-serif;
+    text-align: center;
+}
+
+*::-webkit-input-placeholder {
+    color: #aaa;
+}    
+*:-moz-placeholder {
+    color: #aaa;
+}
+*::-moz-placeholder {
+    color: #aaa;
+}    
+*:-ms-input-placeholder {
+    color: #aaa;
+}
+
+#logo:before {
+    content: "scInstant";
+}
+
+#logo {
+    font-size: 4em;
+    font-weight: 100;
+    color: #FF6600;
+}
+
+#app {
+    padding: 5% 10%;
+}
+
+#searchterm {
+    width: 80%;
+    max-width: 300px;
+    height: 20px;
+    font-size: 18px;
+    padding: 3px;
+    border-radius: 8px;
+    border: 0;
+    color: #111;
+    background: rgba(0,0,0,.1);
+    padding: 10px;
+    outline: 0px;
+    box-shadow: 0 1px 0 rgba(255,255,255,.15), 
+                0 2px 4px rgba(0,0,0,.2) inset, 
+                0 0 12px rgba(255,255,255,.1);
+}
+
+#widget {
+    margin-top: 2em;
+}
+
+#error {
+    color: #FF4136;
+    font-weight: 600;
+    margin: 20px;
+}
