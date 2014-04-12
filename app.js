@@ -34,7 +34,7 @@ $(document).ready(function(){
 
         timer = setTimeout(function() {
             instaSearch(q);
-        }, 900); // wait for 900ms after search query
+        }, 200); // wait for 200ms after search query
 
     });
 
