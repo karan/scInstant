@@ -22,6 +22,7 @@ body {
 }
 
 #logo {
+    margin-top: 30px;
     font-size: 4em;
     font-weight: 100;
     color: #FF6600;
