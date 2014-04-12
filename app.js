@@ -9,7 +9,7 @@ $(document).ready(function(){
         if (q == '' || q == undefined) {
             $('#widget').empty();
             $('#error').empty();
-            $('#error').append('Try searching for something.');
+            // $('#error').append('Try searching for something.');
             return;
         }
 
@@ -30,7 +30,6 @@ $(document).ready(function(){
                 var track = tracks[0];
                 $('#widget').empty();
                 $('#error').empty();
-                // $('#widget').append('<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + track.id + '&amp;color=ff6600&amp;auto_play=false&amp;show_artwork=true"></iframe>');
                 SC.oEmbed(track.uri, document.getElementById("widget"));
             }
         });
