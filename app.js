@@ -31,7 +31,7 @@ $(document).ready(function(){
                 $('#widget').empty();
                 $('#error').empty();
                 // $('#widget').append('<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + track.id + '&amp;color=ff6600&amp;auto_play=false&amp;show_artwork=true"></iframe>');
-                SC.oEmbed(track.uri, {color:"111111"}, document.getElementById("widget"));
+                SC.oEmbed(track.uri, document.getElementById("widget"));
             }
         });
     });
