@@ -1,4 +1,10 @@
 $(document).ready(function(){
+
+    $('#widget').empty();
+    $('#error').empty();
+
+    var timer;
+
     SC.initialize({
         client_id: '7182630dc6a6fc8aa606657648545826'
     });
@@ -21,7 +27,16 @@ $(document).ready(function(){
             return;
         }
 
-        SC.get('/tracks', { q: q }, function(tracks) {
+        clearTimeout(timer);
+
+        timer = setTimeout(function() {
+            instaSearch(q);
+        }, 900); // wait for 900ms after search query
+
+    });
+
+    function instaSearch(q) {
+        SC.get('/tracks', { q: q, limit: 1 }, function(tracks) {
             if (tracks.length == 0) {
                 $('#widget').empty();
                 $('#error').empty();
@@ -33,5 +48,8 @@ $(document).ready(function(){
                 SC.oEmbed(track.uri, document.getElementById("widget"));
             }
         });
-    });
+    }
+
 });
+
+
