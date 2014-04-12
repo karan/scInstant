@@ -1,0 +1,27 @@
+body {
+    background-color: #3D9970;
+    font-family: avenir, 'avenir next', helvetica, arial, sans-serif;
+}
+
+#app {
+    padding: 50px;
+    text-align: center;
+}
+
+#searchterm {
+    width: 300px;
+    height: 20px;
+    font-size: 18px;
+    padding: 3px;
+    border-radius: 8px;
+    border: 0;
+    color: #fff;
+    background: rgba(0,0,0,.1);
+    padding: 10px;
+    outline: 0px;
+    box-shadow: 0 1px 0 rgba(255,255,255,.15), 0 2px 4px rgba(0,0,0,.2) inset, 0 0 12px rgba(255,255,255,.1);
+}
+
+#widget {
+    margin-top: 2em;
+}
