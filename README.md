@@ -7,7 +7,7 @@ SoundCloud Instant Search.
 
 *A Saturday morning hack.*
 
-### Build with
+### Built with
 
 - [SoundCloud JS SDK](http://developers.soundcloud.com/docs/api/sdks#javascript)
 - [jQuery](http://jquery.com/)
