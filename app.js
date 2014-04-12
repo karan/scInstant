@@ -10,6 +10,9 @@ $(document).ready(function(){
     });
 
     $('#searchterm').keyup(function(e) {
+        // google analytics
+        ga('send', 'event', 'input', 'search');
+
         var q = $("#searchterm").val();
 
         if (q == '' || q == undefined) {
