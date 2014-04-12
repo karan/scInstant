@@ -17,13 +17,17 @@ body {
     color: #aaa;
 }
 
+a {
+    color: #FF6600;
+}
+
 #logo:before {
     content: "scInstant";
+    font-size: 4em;
 }
 
 #logo {
     margin-top: 30px;
-    font-size: 4em;
     font-weight: 100;
     color: #FF6600;
 }
