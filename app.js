@@ -3,13 +3,42 @@ $(document).ready(function(){
     $('#widget').empty();
     $('#error').empty();
 
-    var timer;
-
     SC.initialize({
         client_id: '7182630dc6a6fc8aa606657648545826'
     });
 
-    instaSearch('PARTYNEXTDOOR ~ Relax With Me');
+    var iframe = document.querySelector('#widget');
+    iframe.src = "http://w.soundcloud.com/player/?url=http://api.soundcloud.com/tracks/43315398";
+    
+    var widget = SC.Widget(iframe);
+
+    var timer;
+
+    // print the current playing sound
+    var getSound = function() {
+        widget.getCurrentSound(function(currentSound) {
+            console.log('sound ' + currentSound.title + 'began to play');
+        });
+    }
+
+    var getVol = function() {
+        widget.getVolume(function(volume) {
+            console.log('current volume value is ' + volume);
+        });
+    }
+
+    // bind events to the widget
+    widget.bind(SC.Widget.Events.READY, function() {
+        widget.bind(SC.Widget.Events.PLAY, function(e) {
+            // get information about currently playing sound
+            getSound();
+            getVol();
+        });
+    });
+
+
+    // on page load, play something
+    // instaSearch('Relax With Me');
 
     $('#searchterm').keyup(function(e) {
         // google analytics
@@ -50,8 +79,10 @@ $(document).ready(function(){
                 var track = tracks[0];
                 $('#widget').empty();
                 $('#error').empty();
-                // SC.oEmbed(track.uri, {auto_play: true}, document.getElementById("widget"));
-                SC.oEmbed(track.uri, document.getElementById("widget"));
+
+                widget.load(track.uri, {
+                    show_comments: false
+                });
             }
         });
     }

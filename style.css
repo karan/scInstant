@@ -55,7 +55,7 @@ a {
 }
 
 #app {
-    margin: 2em 10%;
+    margin: 5% 10%;
 }
 
 #searchterm {
@@ -82,6 +82,8 @@ a {
 
 #widget {
     margin-top: 1em;
+    display:block;
+    border:0;
 }
 
 #error {
