@@ -1,3 +1,5 @@
+html,body { height: 100%; margin: 0px; padding: 0px; }
+
 body {
     background-color: #ffffff;
     font-family: avenir, 'avenir next', helvetica, arial, sans-serif;
@@ -21,15 +23,35 @@ a {
     color: #FF6600;
 }
 
+#container {
+    margin-left: 10%;
+    margin-right: 10%;
+    padding: 1% 5%;
+    background-color: #DDD;
+    height: 100%;
+}
+
+#header {
+    height: 100px;
+}
+
 #logo:before {
     content: "scInstant";
-    font-size: 4em;
+    font-size: 3.5em;
 }
 
 #logo {
-    margin-top: 30px;
     font-weight: 100;
     color: #FF6600;
+    float: left;
+    width: 30%;
+}
+
+#search {
+    width: 60%;
+    float: right;
+    padding-top: 1.9em;
+    padding-left: 5%;
 }
 
 #app {
@@ -37,8 +59,9 @@ a {
 }
 
 #searchterm {
-    width: 80%;
-    max-width: 300px;
+    float: left;
+    width: 70%;
+    max-width: 400px;
     height: 20px;
     font-size: 18px;
     margin-top: 1px;
@@ -51,6 +74,10 @@ a {
     box-shadow: 0 1px 0 rgba(255,255,255,.15), 
                 0 2px 4px rgba(0,0,0,.2) inset, 
                 0 0 12px rgba(255,255,255,.1);
+}
+
+.twitter-share-button {
+    float: right;
 }
 
 #widget {

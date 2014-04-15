@@ -9,6 +9,8 @@ $(document).ready(function(){
         client_id: '7182630dc6a6fc8aa606657648545826'
     });
 
+    instaSearch('PARTYNEXTDOOR ~ Relax With Me');
+
     $('#searchterm').keyup(function(e) {
         // google analytics
         ga('send', 'event', 'input', 'search');
@@ -48,7 +50,8 @@ $(document).ready(function(){
                 var track = tracks[0];
                 $('#widget').empty();
                 $('#error').empty();
-                SC.oEmbed(track.uri, {auto_play: true}, document.getElementById("widget"));
+                // SC.oEmbed(track.uri, {auto_play: true}, document.getElementById("widget"));
+                SC.oEmbed(track.uri, document.getElementById("widget"));
             }
         });
     }
