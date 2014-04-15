@@ -1,44 +1,19 @@
 $(document).ready(function(){
 
+    var client_id = '7182630dc6a6fc8aa606657648545826';
+
     $('#widget').empty();
     $('#error').empty();
 
     SC.initialize({
-        client_id: '7182630dc6a6fc8aa606657648545826'
+        client_id: client_id
     });
-
-    var iframe = document.querySelector('#widget');
-    iframe.src = "http://w.soundcloud.com/player/?url=http://api.soundcloud.com/tracks/43315398";
-    
-    var widget = SC.Widget(iframe);
 
     var timer;
-
-    // print the current playing sound
-    var getSound = function() {
-        widget.getCurrentSound(function(currentSound) {
-            console.log('sound ' + currentSound.title + 'began to play');
-        });
-    }
-
-    var getVol = function() {
-        widget.getVolume(function(volume) {
-            console.log('current volume value is ' + volume);
-        });
-    }
-
-    // bind events to the widget
-    widget.bind(SC.Widget.Events.READY, function() {
-        widget.bind(SC.Widget.Events.PLAY, function(e) {
-            // get information about currently playing sound
-            getSound();
-            getVol();
-        });
-    });
-
+    var tracks = [];
 
     // on page load, play something
-    // instaSearch('Relax With Me');
+    instaSearch('Relax With Me');
 
     $('#searchterm').keyup(function(e) {
         // google analytics
@@ -80,13 +55,22 @@ $(document).ready(function(){
                 $('#widget').empty();
                 $('#error').empty();
 
-                widget.load(track.uri, {
-                    show_comments: false
+                SC.get(track.uri, {}, function(sound, error) {
+                  $('#widget').attr('src', sound.stream_url + '?client_id=' + client_id);
                 });
+
+                $('#trackname').text(track.title);
             }
         });
     }
 
 });
 
-
+function aud_play_pause() {
+    var myAudio = $("#widget")[0];
+    if (myAudio.paused) {
+        myAudio.play();
+    } else {
+        myAudio.pause();
+    }
+}
