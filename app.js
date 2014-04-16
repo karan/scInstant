@@ -65,6 +65,7 @@ $(document).ready(function(){
     // takes a track from SoundCloud and plays it.
     function playTrack(track) {
         // update the audio tag source
+        console.log(track.uri);
         SC.get(track.uri, {}, function(sound, error) {
           $('#widget').attr('src', sound.stream_url + '?client_id=' + client_id);
         });
