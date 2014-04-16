@@ -21,7 +21,8 @@ $(document).ready(function(){
         client_id: client_id
     });
 
-    iframe.src = "http://w.soundcloud.com/player/?url=http://api.soundcloud.com/tracks/43315398";
+    // on page load, start with a single song
+    iframe.src = "http://w.soundcloud.com/player/?url=https://soundcloud.com/withlovexavier/drake-medley";
     widget = SC.Widget(iframe);
 
     // keyboard shortcut bindings
@@ -59,10 +60,6 @@ $(document).ready(function(){
             getVol();
         });
     });
-
-
-    // on page load, play something
-    instaSearch('WithLoveXavier');
 
     // main function that handles searching
     $('#searchterm').keyup(function(e) {
