@@ -62,7 +62,7 @@ $(document).ready(function(){
     });
 
     // main function that handles searching
-    $('#searchterm').keyup(function(e) {
+    $('#searchterm').keyup(function(event) {
         // google analytics
         ga('send', 'event', 'input', 'search');
 
