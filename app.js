@@ -1,18 +1,40 @@
 $(document).ready(function(){
 
-    $('#widget').empty();
-    $('#error').empty();
+    // SC api key
+    var client_id = '7182630dc6a6fc8aa606657648545826';
+
+    // store all tracks after a search query
+    var all_tracks = [];
+
+    // timer to search only after a while
+    var timer;
+
+    // iframe that stores the SC player
+    var iframe = $("#widget")[0];
+
+    // the SC Widget object
+    var widget;
 
     SC.initialize({
-        client_id: '7182630dc6a6fc8aa606657648545826'
+        client_id: client_id
     });
 
-    var iframe = document.querySelector('#widget');
     iframe.src = "http://w.soundcloud.com/player/?url=http://api.soundcloud.com/tracks/43315398";
-    
-    var widget = SC.Widget(iframe);
+    widget = SC.Widget(iframe);
 
-    var timer;
+    // keyboard shortcut bindings
+    $(document).keydown(function(e) {
+        // this won't work if search field is focussed
+        if (!$("#searchterm").is(':focus')) {
+            e.preventDefault();
+            // right arrow key pressed, play next
+            if (e.keyCode == 39) {
+                next();
+            } else if (e.keyCode == 32) {
+                toggle();
+            }
+        }
+    });
 
     // print the current playing sound
     var getSound = function() {
@@ -21,6 +43,7 @@ $(document).ready(function(){
         });
     }
 
+    // prints the volume of the player right now
     var getVol = function() {
         widget.getVolume(function(volume) {
             console.log('current volume value is ' + volume);
@@ -38,18 +61,18 @@ $(document).ready(function(){
 
 
     // on page load, play something
-    // instaSearch('Relax With Me');
+    // instaSearch('PARTYNEXTDOOR');
 
+    // main function that handles searching
     $('#searchterm').keyup(function(e) {
         // google analytics
         ga('send', 'event', 'input', 'search');
 
         var q = $("#searchterm").val();
 
+        // validate query
         if (q == '' || q == undefined) {
-            $('#widget').empty();
-            $('#error').empty();
-            // $('#error').append('Try searching for something.');
+            cleanUpSpace();
             return;
         }
 
@@ -57,7 +80,7 @@ $(document).ready(function(){
         var c = String.fromCharCode(event.keyCode);
         var isWordCharacter = c.match(/\w/);
         var isBackspaceOrDelete = (event.keyCode == 8 || event.keyCode == 46);
-        if ((!isWordCharacter && !isBackspaceOrDelete)) {
+        if (!isWordCharacter && !isBackspaceOrDelete) {
             return;
         }
 
@@ -69,22 +92,61 @@ $(document).ready(function(){
 
     });
 
+    // searches and plays a track
     function instaSearch(q) {
-        SC.get('/tracks', { q: q, limit: 1 }, function(tracks) {
+        SC.get('/tracks', { q: q, limit: 10 }, function(tracks) {
             if (tracks.length == 0) {
-                $('#widget').empty();
-                $('#error').empty();
+                cleanUpSpace();
                 $('#error').append('No tracks found');
             } else {
-                var track = tracks[0];
-                $('#widget').empty();
-                $('#error').empty();
-
-                widget.load(track.uri, {
-                    show_comments: false
-                });
+                all_tracks = tracks;
+                var track = all_tracks.splice(0, 1)[0];
+                playTrack(track);
             }
         });
+    }
+
+    // takes a track from SoundCloud and plays it.
+    function playTrack(track) {
+        cleanUpSpace();
+        console.log(track.uri);
+        // update the audio tag source
+        widget.load(track.uri, {
+            auto_play: true,
+            buying: false,
+            liking: false,
+            download: false,
+            sharing: false,
+            show_playcount: false,
+            show_user: false,
+            show_comments: false
+        });
+
+        // set the title of the track
+        $('#trackname').text(track.title);
+
+        console.log("loaded " + track.title);
+    }
+
+    // toggle play and paused state of audio player
+    window.toggle = function() {
+        widget.toggle();
+    }
+
+    // play the next song in queue and remove the track that
+    // is to be played.
+    window.next = function() {
+        if (all_tracks.length != 0) {
+            var track = all_tracks.splice(0, 1)[0];
+            playTrack(track);
+        } else {
+            console.log("empty");
+        }
+    }
+
+    var cleanUpSpace = function() {
+        $('#widget').empty();
+        $('#error').empty();
     }
 
 });
