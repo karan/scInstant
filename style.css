@@ -26,7 +26,7 @@ a {
 #container {
     margin-left: 10%;
     margin-right: 10%;
-    padding: 1% 5%;
+    padding: 0% 5%;
     background-color: #DDD;
     height: 100%;
 }
@@ -43,15 +43,10 @@ a {
 #logo {
     font-weight: 100;
     color: #FF6600;
-    float: left;
-    width: 30%;
 }
 
 #search {
-    width: 60%;
-    float: right;
-    padding-top: 1.9em;
-    padding-left: 5%;
+    margin-top: 30px;
 }
 
 #app {
@@ -59,8 +54,7 @@ a {
 }
 
 #searchterm {
-    float: left;
-    width: 70%;
+    width: 80%;
     max-width: 400px;
     height: 20px;
     font-size: 18px;
@@ -77,7 +71,7 @@ a {
 }
 
 .twitter-share-button {
-    float: right;
+    float: center;
 }
 
 #widget {

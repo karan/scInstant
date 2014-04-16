@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+    $(document).height($(window).height());
+
     // SC api key
     var client_id = '7182630dc6a6fc8aa606657648545826';
 
@@ -26,7 +28,6 @@ $(document).ready(function(){
     $(document).keydown(function(e) {
         // this won't work if search field is focussed
         if (!$("#searchterm").is(':focus')) {
-            e.preventDefault();
             // right arrow key pressed, play next
             if (e.keyCode == 39) {
                 next();
@@ -61,7 +62,7 @@ $(document).ready(function(){
 
 
     // on page load, play something
-    // instaSearch('PARTYNEXTDOOR');
+    instaSearch('WithLoveXavier');
 
     // main function that handles searching
     $('#searchterm').keyup(function(e) {
@@ -72,7 +73,6 @@ $(document).ready(function(){
 
         // validate query
         if (q == '' || q == undefined) {
-            cleanUpSpace();
             return;
         }
 
@@ -118,7 +118,6 @@ $(document).ready(function(){
             download: false,
             sharing: false,
             show_playcount: false,
-            show_user: false,
             show_comments: false
         });
 
@@ -140,7 +139,9 @@ $(document).ready(function(){
             var track = all_tracks.splice(0, 1)[0];
             playTrack(track);
         } else {
-            console.log("empty");
+            cleanUpSpace();
+            $('#error').append('No more songs. Try searching.');
+            $('#searchterm').focus();
         }
     }
 
