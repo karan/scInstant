@@ -10,10 +10,11 @@ $(document).ready(function(){
     });
 
     var timer;
-    var tracks = [];
+    var all_tracks = [];
+    var audioElem = $("#widget")[0];
 
     // on page load, play something
-    instaSearch('Relax With Me');
+    instaSearch('PARTYNEXTDOOR');
 
     $('#searchterm').keyup(function(e) {
         // google analytics
@@ -45,32 +46,53 @@ $(document).ready(function(){
     });
 
     function instaSearch(q) {
-        SC.get('/tracks', { q: q, limit: 1 }, function(tracks) {
+        SC.get('/tracks', { q: q, limit: 10 }, function(tracks) {
             if (tracks.length == 0) {
                 $('#widget').empty();
                 $('#error').empty();
                 $('#error').append('No tracks found');
             } else {
-                var track = tracks[0];
+                all_tracks = tracks;
                 $('#widget').empty();
                 $('#error').empty();
 
-                SC.get(track.uri, {}, function(sound, error) {
-                  $('#widget').attr('src', sound.stream_url + '?client_id=' + client_id);
-                });
-
-                $('#trackname').text(track.title);
+                var track = all_tracks.splice(0, 1)[0];
+                playTrack(track);
             }
         });
     }
 
-});
+    // takes a track from SoundCloud and plays it.
+    function playTrack(track) {
+        // update the audio tag source
+        SC.get(track.uri, {}, function(sound, error) {
+          $('#widget').attr('src', sound.stream_url + '?client_id=' + client_id);
+        });
 
-function aud_play_pause() {
-    var myAudio = $("#widget")[0];
-    if (myAudio.paused) {
-        myAudio.play();
-    } else {
-        myAudio.pause();
+        // set the title of the track
+        $('#trackname').text(track.title);
+
+        console.log("loaded " + track.title);
     }
-}
+
+    // toggle play and paused state of audio player
+    window.toggle = function() {
+        if (audioElem.paused) {
+            audioElem.play();
+        } else {
+            audioElem.pause();
+        }
+    }
+
+    // play the next song in queue and remove the track that
+    // is to be played.
+    window.next = function() {
+        if (all_tracks.length != 0) {
+            var track = all_tracks.splice(0, 1)[0];
+            playTrack(track);
+        } else {
+            console.log("empty");
+        }
+    }
+
+});

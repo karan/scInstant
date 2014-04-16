@@ -8,7 +8,6 @@
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="http://connect.soundcloud.com/sdk.js"></script>
-    <script src="https://w.soundcloud.com/player/api.js"></script>
     <script type="text/javascript" src="app.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -32,11 +31,10 @@
 
       <div id="app">      
           <div id="error"></div>
-          <!-- <iframe id="widget" width="100%"></iframe> -->
           <audio id="widget"></audio>
           <p id="trackname"></p>
-          <button type="button" onclick="aud_play_pause()">Play/Pause</button>
-          <!-- <div id="widget"></div> -->
+          <button type="button" onclick="toggle()">Play/Pause</button>
+          <button type="button" onclick="next()">Next</button>
       </div>
 
     </div>
