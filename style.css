@@ -46,12 +46,20 @@ a {
 }
 
 #sharing {
-    height: 30px;
+    /*width: 50%;*/
     display: inline-block;
 }
 
 #sharing iframe {
     vertical-align: middle;
+}
+
+.twitter-share-button {
+    float: left;
+}
+
+.fb-like {
+    float: right;
 }
 
 #search {
