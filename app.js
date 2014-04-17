@@ -123,7 +123,6 @@ $(document).ready(function(){
             auto_play: true,
             buying: false,
             liking: false,
-            download: false,
             sharing: false,
             show_playcount: false,
             show_comments: false
