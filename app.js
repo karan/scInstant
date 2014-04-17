@@ -59,6 +59,10 @@ $(document).ready(function(){
             getSound();
             getVol();
         });
+
+        widget.bind(SC.Widget.Events.FINISH, function(e) {
+            next();
+        });
     });
 
     // main function that handles searching
