@@ -56,8 +56,8 @@ $(document).ready(function(){
     widget.bind(SC.Widget.Events.READY, function() {
         widget.bind(SC.Widget.Events.PLAY, function(e) {
             // get information about currently playing sound
-            getSound();
-            getVol();
+            // getSound();
+            // getVol();
         });
 
         widget.bind(SC.Widget.Events.FINISH, function(e) {
@@ -81,17 +81,15 @@ $(document).ready(function(){
         }
 
         // search only if character key is pressed
-        var c = String.fromCharCode(event.keyCode);
-        var isWordCharacter = c.match(/\w/);
-        var isBackspaceOrDelete = (event.keyCode == 8 || event.keyCode == 46);
+        // var c = String.fromCharCode(event.keyCode);
+        // var isWordCharacter = c.match(/\w/);
+        // var isBackspaceOrDelete = (event.keyCode == 8 || event.keyCode == 46);
 
         if (event.keyCode == 17 || event.keyCode == 18 || event.keyCode == 91 ||
             event.keyCode == 9 || event.keyCode == 16) {
             // control, option, command, tab, shift
             return;
         }
-
-        console.log(event.keyCode);
 
         clearTimeout(timer);
 
@@ -119,7 +117,7 @@ $(document).ready(function(){
     function playTrack(track) {
         ga('send', 'event', 'play', 'songPla');
         cleanUpSpace();
-        console.log(track.uri);
+        // console.log(track.uri);
         // update the audio tag source
         widget.load(track.uri, {
             auto_play: true,
@@ -134,7 +132,7 @@ $(document).ready(function(){
         // set the title of the track
         $('#trackname').text(track.title);
 
-        console.log("loaded " + track.title);
+        // console.log("loaded " + track.title);
     }
 
     // toggle play and paused state of audio player
