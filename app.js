@@ -82,7 +82,9 @@ $(document).ready(function(){
         var isWordCharacter = c.match(/\w/);
         var isBackspaceOrDelete = (event.keyCode == 8 || event.keyCode == 46);
 
-        if (event.keyCode == 17 || event.keyCode == 18 || event.keyCode == 91) {
+        if (event.keyCode == 17 || event.keyCode == 18 || event.keyCode == 91 ||
+            event.keyCode == 9) {
+            // control, option, command, shift
             return;
         }
 
