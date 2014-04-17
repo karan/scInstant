@@ -122,7 +122,6 @@ $(document).ready(function(){
         widget.load(track.uri, {
             auto_play: true,
             buying: false,
-            liking: false,
             sharing: false,
             show_playcount: false,
             show_comments: false
