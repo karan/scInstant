@@ -37,10 +37,10 @@ $(function(){
                 // space key to toggle playback
                 toggle();
             } else if (e.shiftKey && e.keyCode == 38) {
-                // shift right
+                // shift up
                 volumeUp();
             } else if (e.shiftKey && e.keyCode == 40) {
-                // shift left
+                // shift down
                 volumeDown();
             }
         }
