@@ -81,7 +81,8 @@ $(document).ready(function(){
         var c = String.fromCharCode(event.keyCode);
         var isWordCharacter = c.match(/\w/);
         var isBackspaceOrDelete = (event.keyCode == 8 || event.keyCode == 46);
-        if (!isWordCharacter && !isBackspaceOrDelete) {
+
+        if (event.keyCode == 17 || event.keyCode == 18 || event.keyCode == 91) {
             return;
         }
 
@@ -109,6 +110,7 @@ $(document).ready(function(){
 
     // takes a track from SoundCloud and plays it.
     function playTrack(track) {
+        ga('send', 'event', 'play', 'songPla');
         cleanUpSpace();
         console.log(track.uri);
         // update the audio tag source
