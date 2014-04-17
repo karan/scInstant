@@ -67,6 +67,9 @@ $(document).ready(function(){
 
     // main function that handles searching
     $('#searchterm').keyup(function(event) {
+
+        event.preventDefault();
+
         // google analytics
         ga('send', 'event', 'input', 'search');
 
@@ -83,7 +86,7 @@ $(document).ready(function(){
         var isBackspaceOrDelete = (event.keyCode == 8 || event.keyCode == 46);
 
         if (event.keyCode == 17 || event.keyCode == 18 || event.keyCode == 91 ||
-            event.keyCode == 9, event.keyCode == 16) {
+            event.keyCode == 9 || event.keyCode == 16) {
             // control, option, command, tab, shift
             return;
         }
