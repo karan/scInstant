@@ -17,6 +17,7 @@ $(function(){
     // the SC Widget object
     var widget;
 
+    // initialize the soundcloud app
     SC.initialize({
         client_id: client_id
     });
@@ -29,53 +30,25 @@ $(function(){
     $(document).keydown(function(e) {
         // this won't work if search field is focussed
         if (!$("#searchterm").is(':focus')) {
-            // right arrow key pressed, play next
             if (e.keyCode == 39) {
+                // right arrow key pressed, play next
                 next();
             } else if (e.keyCode == 32) {
+                // space key to toggle playback
                 toggle();
             } else if (e.shiftKey && e.keyCode == 38) {
+                // shift right
                 volumeUp();
             } else if (e.shiftKey && e.keyCode == 40) {
+                // shift left
                 volumeDown();
             }
         }
     });
 
-    var volumeUp = function() {
-        widget.getVolume(function(volume) {
-            widget.setVolume(Math.min(100, volume + 5));
-        });
-    }
-
-    var volumeDown = function() {
-        widget.getVolume(function(volume) {
-            widget.setVolume(Math.max(0, volume - 5));
-        });
-    }
-
-    // print the current playing sound
-    var getSound = function() {
-        widget.getCurrentSound(function(currentSound) {
-            console.log('sound ' + currentSound.title + 'began to play');
-        });
-    }
-
-    // prints the volume of the player right now
-    var getVol = function() {
-        widget.getVolume(function(volume) {
-            console.log('current volume value is ' + volume);
-        });
-    }
-
     // bind events to the widget
     widget.bind(SC.Widget.Events.READY, function() {
-        widget.bind(SC.Widget.Events.PLAY, function(e) {
-            // get information about currently playing sound
-            // getSound();
-            // getVol();
-        });
-
+        // when the track finishes, play the next one
         widget.bind(SC.Widget.Events.FINISH, function(e) {
             next();
         });
@@ -95,11 +68,6 @@ $(function(){
         if (q == '' || q == undefined) {
             return;
         }
-
-        // search only if character key is pressed
-        // var c = String.fromCharCode(event.keyCode);
-        // var isWordCharacter = c.match(/\w/);
-        // var isBackspaceOrDelete = (event.keyCode == 8 || event.keyCode == 46);
 
         if (event.keyCode == 17 || event.keyCode == 18 || event.keyCode == 91 ||
             event.keyCode == 9 || event.keyCode == 16) {
@@ -134,7 +102,7 @@ $(function(){
         ga('send', 'event', 'play', 'songPla');
         cleanUpSpace();
         // console.log(track.uri);
-        // update the audio tag source
+        // update the iframe source
         widget.load(track.uri, {
             auto_play: true,
             buying: false,
@@ -150,13 +118,13 @@ $(function(){
     }
 
     // toggle play and paused state of audio player
-    window.toggle = function() {
+    var toggle = function() {
         widget.toggle();
     }
 
     // play the next song in queue and remove the track that
     // is to be played.
-    window.next = function() {
+    var next = function() {
         if (all_tracks.length != 0) {
             var track = all_tracks.splice(0, 1)[0];
             playTrack(track);
@@ -165,6 +133,18 @@ $(function(){
             $('#error').append('No more songs. Try searching.');
             $('#searchterm').focus();
         }
+    }
+
+    var volumeUp = function() {
+        widget.getVolume(function(volume) {
+            widget.setVolume(Math.min(100, volume + 5));
+        });
+    }
+
+    var volumeDown = function() {
+        widget.getVolume(function(volume) {
+            widget.setVolume(Math.max(0, volume - 5));
+        });
     }
 
     var cleanUpSpace = function() {
