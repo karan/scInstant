@@ -34,9 +34,25 @@ $(document).ready(function(){
                 next();
             } else if (e.keyCode == 32) {
                 toggle();
+            } else if (e.shiftKey && e.keyCode == 38) {
+                volumeUp();
+            } else if (e.shiftKey && e.keyCode == 40) {
+                volumeDown();
             }
         }
     });
+
+    var volumeUp = function() {
+        widget.getVolume(function(volume) {
+            widget.setVolume(Math.min(100, volume + 5));
+        });
+    }
+
+    var volumeDown = function() {
+        widget.getVolume(function(volume) {
+            widget.setVolume(Math.max(0, volume - 5));
+        });
+    }
 
     // print the current playing sound
     var getSound = function() {
