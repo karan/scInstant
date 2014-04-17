@@ -32,7 +32,7 @@ a {
 }
 
 #header {
-    height: 100px;
+    margin-bottom: 30px;
 }
 
 #logo:before {
