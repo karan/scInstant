@@ -22,9 +22,7 @@ $(function(){
         client_id: client_id
     });
 
-    // on page load, start with a single song
-    iframe.src = "http://w.soundcloud.com/player/?url=https://soundcloud.com/withlovexavier/drake-medley";
-    widget = SC.Widget(iframe);
+    var audioElem = $("#widget")[0];
 
     // keyboard shortcut bindings
     $(document).keydown(function(e) {
@@ -47,12 +45,12 @@ $(function(){
     });
 
     // bind events to the widget
-    widget.bind(SC.Widget.Events.READY, function() {
-        // when the track finishes, play the next one
-        widget.bind(SC.Widget.Events.FINISH, function(e) {
-            next();
-        });
-    });
+    // widget.bind(SC.Widget.Events.READY, function() {
+    //     // when the track finishes, play the next one
+    //     widget.bind(SC.Widget.Events.FINISH, function(e) {
+    //         next();
+    //     });
+    // });
 
     // main function that handles searching
     $('#searchterm').keyup(function(event) {
@@ -60,7 +58,7 @@ $(function(){
         event.preventDefault();
 
         // google analytics
-        ga('send', 'event', 'input', 'search');
+        // ga('send', 'event', 'input', 'search');
 
         var q = $("#searchterm").val();
 
@@ -99,17 +97,15 @@ $(function(){
 
     // takes a track from SoundCloud and plays it.
     function playTrack(track) {
-        ga('send', 'event', 'play', 'songPla');
+        // ga('send', 'event', 'play', 'songPla');
         cleanUpSpace();
-        // console.log(track.uri);
+        console.log(track);
         // update the iframe source
-        widget.load(track.uri, {
-            auto_play: true,
-            buying: false,
-            sharing: false,
-            show_playcount: false,
-            show_comments: false
+        SC.get(track.uri, {}, function(sound, error) {
+          $('#widget').attr('src', sound.stream_url + '?client_id=' + client_id);
         });
+
+        $("#artwork").css("background", "url(" + track.artwork_url.replace("large", "original") + ") no-repeat center center fixed")
 
         // set the title of the track
         $('#trackname').text(track.title);

@@ -62,8 +62,16 @@ a {
     float: right;
 }
 
+#artwork {
+    height: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
 #search {
-    margin-top: 30px;
+    bottom: 10px;
 }
 
 #app {
